@@ -1,6 +1,6 @@
 # CLI for In-Browser IDE: Code Snippet + Documentation Generator
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Write code snippets. Run code snippets. Take notes. Combine and export them!
+Write code snippets. Run code snippets. Take notes. Combine and export them!
 
 ## The *What* & *Why*
   - With **SnipSnap's** web-based IDE, you can *transpile* your JavaScript, *import modules*, *bundle it together* and *run it* -- all without making any server-side requests! 
