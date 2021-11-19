@@ -2,11 +2,7 @@
 import CodeSandbox from "./components/CodeSandbox/CodeSandbox";
 
 function App() {
-  return (
-    <>
-      <CodeSandbox />
-    </>
-  );
+  return <CodeSandbox />;
 }
 
 export default App;

@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import * as esbuild from "esbuild-wasm";
+// Utils + Plugins
+import { unpkgPathPlugin } from "../../plugins/unpkg-path-plugin";
+import { fetchPlugin } from "../../plugins/fetch-plugin";
+// Component(s)
 
 function CodeSandbox() {
   const [codeInput, setCodeInput] = useState("");
-  const [transpiledCode, setTranspiledCode] = useState("transpiled code...");
+  const [bundledCode, setBundledCode] = useState("bundled code...");
   // const [service, _setService] =   
   const serviceRef = useRef<any>()
   
@@ -22,16 +26,25 @@ function CodeSandbox() {
     setCodeInput(e.target.value);
   }
 
-  async function handleSubmitCode(e: any) {
+  async function handleBundleCode(e: any) {
     e.preventDefault();
     if (!serviceRef.current) return;
     try {
-      await serviceRef.current.transform(codeInput, {
-          loader: "jsx",
-          target: "es2015"
-        }).then((transformed: any) => {
-          setTranspiledCode(transformed.code);
-        });
+      const bundled = await serviceRef.current.build({
+        entryPoints: ["index.tsx"],
+        bundle: true,
+        write: false,
+        plugins: [
+          unpkgPathPlugin(),
+          fetchPlugin(codeInput)
+        ],
+        define: {
+          global: "window",
+          "process.env.NODE_ENV": "'production'"
+        }
+      });
+      
+      setBundledCode(bundled.outputFiles[0].text);
     } catch (error) {
       console.log(error);
     }
@@ -39,10 +52,10 @@ function CodeSandbox() {
 
   return (
     <>
-      <form onSubmit={handleSubmitCode}>
+      <form onSubmit={handleBundleCode}>
         <textarea
           autoFocus 
-          required 
+          // required 
           name="IDE Window" 
           placeholder="Write code here..." 
           value={codeInput}
@@ -52,9 +65,8 @@ function CodeSandbox() {
         />
         <button type="submit">Run!</button>
       </form>
-      <pre>{transpiledCode}</pre>
+      <pre>{bundledCode}</pre>
     </>
-      
   );
 }
 
