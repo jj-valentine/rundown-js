@@ -15,7 +15,6 @@ export const unpkgPathPlugin = () => {
         return { path, namespace: "a" };
       });
 
-      /* handle resolving primary file of a module */
       build.onResolve({ filter: /.*/ }, async (args: any) => {
         return { path: `https://unpkg.com/${args.path}`, namespace: "a" };
       });

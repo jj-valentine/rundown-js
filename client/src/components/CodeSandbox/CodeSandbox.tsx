@@ -15,7 +15,7 @@ function CodeSandbox() {
     const startService = async () => {
       serviceRef.current = await esbuild.startService({
         worker: true,
-        wasmURL: "/esbuild.wasm"
+        wasmURL: "https://unpkg.com/esbuild-wasm@0.8.27/esbuild.wasm"
       });
     };
     
@@ -59,8 +59,8 @@ function CodeSandbox() {
           name="IDE Window" 
           placeholder="Write code here..." 
           value={codeInput}
-          rows={25} 
-          cols={100} 
+          rows={14} 
+          cols={65} 
           onChange={handleUpdateInput}
         />
         <button type="submit">Run!</button>
