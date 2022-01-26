@@ -1,6 +1,6 @@
 {
   "short_name": "SnipSnap",
-  "name": "In-Browser IDE + Documentation Generator",
+  "name": "In-Browser IDE + JS/Markdown Snippet Generator",
   "icons": [],
   "start_url": ".",
   "display": "standalone",

@@ -1,0 +1,5 @@
+CLIENT:
+  ☐ Users can write CSS in separate "sandbox window" (will automatically import into JS sandbox and execute alongside said code)
+
+  UTILS/PLUGINS:
+    ☐ Encrypt "#source" script code (i.e. the "id" of the script tag?) in 'iframe-html.ts' → best solution: OBFUSCATION and/or MINIFICATION
