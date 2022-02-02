@@ -4,3 +4,5 @@ CLIENT:
 
   UTILS/PLUGINS:
     ☐ Encrypt "#source" script code (i.e. the "id" of the script tag?) in 'iframe-html.ts' → best solution: OBFUSCATION and/or MINIFICATION
+
+    asdfasdf
