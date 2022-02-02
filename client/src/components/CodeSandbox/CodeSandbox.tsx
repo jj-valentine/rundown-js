@@ -8,7 +8,7 @@ export const CodeSandbox: React.FC = () => {
   return (
     <div className="sandbox-wrapper">
       <CodeEditor />
-      <Preview />
+      {/* <Preview /> */}
     </div>
   );
 };

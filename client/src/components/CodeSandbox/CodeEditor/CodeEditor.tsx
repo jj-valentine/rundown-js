@@ -30,7 +30,7 @@ export const CodeEditor: React.FC = () => {
     e.preventDefault();
     if (!serviceRef.current) return;
     try {
-      const bundled = await serviceRef.current.build({
+      const bundledCode = await serviceRef.current.build({
         entryPoints: ["index.tsx"],
         bundle: true,
         write: false,
@@ -46,7 +46,7 @@ export const CodeEditor: React.FC = () => {
       
       const iframeWindow = iframeRef.current.contentWindow;
       /* send updated/freshly bundled code to 'iframe' via message */
-      iframeWindow.postMessage(bundled.outputFiles[0].text, "*");
+      iframeWindow.postMessage(bundledCode.outputFiles[0].text, "*");
     } catch (err) {
       console.error(err);
     }
@@ -75,7 +75,6 @@ export const CodeEditor: React.FC = () => {
           srcDoc={iFrameHTML}>
         </iframe>
       </div>
-      {/* <pre>{bundledCode}</pre> */}
     </div>
   );
 };
