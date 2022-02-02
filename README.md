@@ -1,8 +1,8 @@
 # CLI for In-Browser IDE: Code Snippet + Documentation Generator
 
-Write code snippets. Run code snippets. Take notes. Combine and export them!
+Create JavaScript snippets. Run your code. Take notes in markdown. Rinse and repeat. 
 
 ## The *What* and The *Why*...
-  - With **SnipSnap's** web-based IDE, you can *transpile* your JavaScript, *import modules*, *bundle it together* and *run it* -- all without making any server-side requests! 
+  - With **RundownJS**'s web-based IDE, you can *import* packages/modules, *transpile*, *bundle*, and *run* your JavaScript code -- all within the browser, at blazing fast speeds, and without ever making a single server-side request! 
 
-  - Do your snippets need context? Document your code in markdown and attach your notes to your snippets to reference later or use elsewhere!
+  - Do your snippets need context? Go full "rundown" -- document your JavaSript using markdown, then group and export your notated snippets for reference and later use!

@@ -1,6 +1,6 @@
 {
-  "short_name": "SnipSnap",
-  "name": "In-Browser IDE + JS/Markdown Snippet Generator",
+  "short_name": "RundownJS",
+  "name": "CLI for In-Browser IDE: Client-Side JavaScript Snippet + Documentation Generator",
   "icons": [],
   "start_url": ".",
   "display": "standalone",
