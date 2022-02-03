@@ -1,25 +1,17 @@
 import React from "react";
   
-/* 
-interface PreviewProps {
-  sourceHTML: string
-}
-
-export const Preview: React.FC<PreviewProps> = ({ sourceHTML }) => {
+export const Preview: React.FC = () => {
   return (
-    <div className="preview-wrapper">
-      <iframe 
-        id="child-context" 
-        title="Preview Context" 
-        ref={iframeRef} 
-        sandbox="allow-scripts" 
-        srcDoc={sourceHTML}>
-      </iframe>
-    </div>
+     <div className="preview-wrapper">
+     {/* <iframe 
+       id="preview-context" 
+       title="preview" 
+       ref={iframeRef} 
+       sandbox="allow-scripts" 
+       srcDoc={iFrameHTML}>
+     </iframe> */}
+   </div>
   );
 }; 
-*/
 
-export const Preview: React.FC = () => {
-  return <div className="preview-wrapper"></div>;
-};
+

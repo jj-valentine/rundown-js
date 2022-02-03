@@ -1,0 +1,92 @@
+@use "../../colors.scss";
+
+.loader-container {
+  box-sizing: border-box; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.loader {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  transform: rotate(175deg);
+
+  span {
+    position: absolute;
+    top: calc(12px * var(--i));
+    bottom: calc(12px * var(--i));
+    left: calc(12px * var(--i));
+    right: calc(12px * var(--i));
+    border: 10px solid colors.$secondary-bg;
+    border-top: 10px solid colors.$yellow;
+    border-left: 10px solid colors.$yellow;
+    border-radius: 50%;
+    animation: waves 1s alternate ease-in-out infinite;
+    animation-delay: calc(-0.1s * var(--i));
+  }
+
+  #circle-1 {
+    border-top-color: colors.$red;
+    border-left-color: colors.$red;
+  }
+
+  #circle-2 {
+    border-top-color: colors.$blue;
+    border-left-color: colors.$blue;
+  }
+
+  #circle-3, #circle-7 {
+    border-top-color: colors.$white;
+    border-left-color: colors.$white;
+  }
+
+  #circle-4 {
+    border-top-color: colors.$yellow;
+    border-left-color: colors.$yellow;
+  }
+
+  #circle-5 {
+    border-top-color: colors.$red;
+    border-left-color: colors.$red;
+  }
+
+  #circle-6 {
+    border-top-color: colors.$blue;
+    border-left-color: colors.$blue;
+  }
+
+  
+}
+
+@keyframes waves {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+// .animate-loader-enter {
+//   transform: scale(1) rotate(0deg);
+// }
+
+// .animate-loader-enter-active {
+//   transform: scale(1) rotate(0deg);
+//   transition: 1s transform ease-in;
+// }
+
+// .animate-loader-exit {
+//   transform: scale(1.5) rotate(180deg);
+//   transition: 1s transform ease-in;
+// }
+
+// .animate-loader-exit-active {
+//   transform: scale(0.4) rotate(0deg);
+// }

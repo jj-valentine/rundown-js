@@ -1,4 +1,4 @@
-# CLI for In-Browser IDE: Code Snippet + Documentation Generator
+# CLI for In-Browser IDE: JS Snippet + Documentation Generator
 
 Create JavaScript snippets. Run your code. Take notes in markdown. Rinse and repeat. 
 

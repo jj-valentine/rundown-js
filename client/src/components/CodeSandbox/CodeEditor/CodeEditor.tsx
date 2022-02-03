@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
+// import MonacoEditor from "@monaco-editor/react";
 import * as esbuild from "esbuild-wasm";
 // Utils + Plugins
 import { iFrameHTML } from "../../../utils/iframe-html";
 import { unpkgPathPlugin } from "../../../utils/plugins/unpkg-path-plugin";
 import { fetchPlugin } from "../../../utils/plugins/fetch-plugin";
+// Component(s)
+// import Loading from "../Loading/Loading";
 
 export const CodeEditor: React.FC = () => {
   const [codeInput, setCodeInput] = useState("");
   const serviceRef = useRef<any>()
-  const iframeRef = useRef<any>();
+  const iFrameRef = useRef<HTMLIFrameElement | null>(null);
   
   useEffect(() => {
     (async () => {
@@ -21,16 +24,16 @@ export const CodeEditor: React.FC = () => {
     });
   }, []);
 
-  function handleUpdatingInput(e: any) {
-    const newInput = e.target.value;
-    if (newInput !== codeInput) setCodeInput(newInput);
-  }
+  const handleChangingInput = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    const inputValue = e.target.value;
+    if (!inputValue && inputValue === codeInput) return;
+    setCodeInput(inputValue);
+  };
 
-  async function handleUpdatingBundledCode(e: any) {
-    e.preventDefault();
+  const handleUpdatingBundledCode = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (!serviceRef.current) return;
     try {
-      const bundledCode = await serviceRef.current.build({
+      const bundle = await serviceRef.current.build({
         entryPoints: ["index.tsx"],
         bundle: true,
         write: false,
@@ -44,16 +47,29 @@ export const CodeEditor: React.FC = () => {
         }
       });
       
-      const iframeWindow = iframeRef.current.contentWindow;
+      if (!iFrameRef.current || !iFrameRef.current.contentWindow) return;
+      const iFrameWindow = iFrameRef.current.contentWindow;
       /* send updated/freshly bundled code to 'iframe' via message */
-      iframeWindow.postMessage(bundledCode.outputFiles[0].text, "*");
+      iFrameWindow.postMessage(bundle.outputFiles[0].text, "*");
     } catch (err) {
       console.error(err);
     }
-  }
-
+  };
+  
   return (
     <div className="code-editor-wrapper">
+      {/* <MonacoEditor 
+        height="30vh"
+        width="70vw"
+        language="javascript"
+        options={{
+          wordWrap: "on",
+          minimap: { enabled: false },
+          cursorStyle: "block"
+        }}
+        // loading={}
+        value="Enter your JavaScript code here..."
+      /> */}
       <textarea
         autoFocus 
         name="IDE Window" // required 
@@ -61,16 +77,17 @@ export const CodeEditor: React.FC = () => {
         value={codeInput}
         rows={14} 
         cols={65} 
-        onChange={e => handleUpdatingInput(e)}
+        onChange={e => handleChangingInput(e)}
       />
+    
       <button onClick={e => handleUpdatingBundledCode(e)}>Run!</button>
 
       {/* TODO: move this into 'Preview' component (once you figure out state management) */}
       <div className="preview-wrapper">
         <iframe 
-          id="child-context" 
-          title="Preview Context" 
-          ref={iframeRef} 
+          id="preview-context" 
+          title="preview" 
+          ref={iFrameRef} 
           sandbox="allow-scripts" 
           srcDoc={iFrameHTML}>
         </iframe>

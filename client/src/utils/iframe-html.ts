@@ -1,11 +1,12 @@
 // Q: is this actually any "BETTER" or "SAFER" than using a simple 'eval' inside callback function which runs upon receiving 'message' from global
 // TODO: encrypt code (i.e. the "id" of the script tag?) → best solution: OBFUSCATION and/or MINIFICATION
 export const iFrameHTML = ((): string => {
-  const iFrameSource = (():void => {
+  const iFrameSource = ((): void => {
     window.addEventListener("message", e => renewSourceHTML(e));
 
-    const renewSourceHTML = (e: any): void => {
+    const renewSourceHTML = (e: MessageEvent<any>): void => {
       e.preventDefault();
+      console.log("asdfasdf")
       const code = e.data, prevScript = document.getElementById("bundled-code");
       if (!code || (prevScript && code === prevScript.innerHTML)) return;
 
@@ -30,7 +31,7 @@ export const iFrameHTML = ((): string => {
         document.body.append(root)
       }
 
-      const handleInputCodeErrors = ((error: any):void => {
+      const handleInputCodeErrors = ((error: any): void => {
         console.error("User Input Error: ", error);
         const errors = document.createElement("aside");
         errors.setAttribute("id", "errors");
