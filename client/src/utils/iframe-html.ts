@@ -5,10 +5,8 @@ export const iFrameHTML = ((): string => {
     window.addEventListener("message", e => renewSourceHTML(e));
 
     const renewSourceHTML = (e: MessageEvent<any>): void => {
-      e.preventDefault();
-      console.log("asdfasdf")
-      const code = e.data, prevScript = document.getElementById("bundled-code");
-      if (!code || (prevScript && code === prevScript.innerHTML)) return;
+      const userCode = e.data, prevScript = document.getElementById("bundled-code");
+      if (!userCode || (prevScript && userCode === prevScript.innerHTML)) return;
 
       /* remove all "secondary" (i.e. user-injected) elements from 'body' -- including '#root' node
       (replacing it entirely is cleaner than attempting to access and individually delete its direct decendants + children) */
@@ -23,7 +21,7 @@ export const iFrameHTML = ((): string => {
           } 
         }
       })();
-      
+
       /* build and inject new '#root' DIV into 'body' element (if one doesn't already exist) */
       if (!document.getElementById("root")) {
         const root = document.createElement("div");
@@ -46,12 +44,11 @@ export const iFrameHTML = ((): string => {
         updatedScript.setAttribute("id", "bundled-code");
         updatedScript.setAttribute("type", "text/javascript");
         // inject bundled code into 'try/catch' block for error handling purposes (within 'iframe' context)
-        updatedScript.append(`try { ${code}; } catch (err) { (${handleInputCodeErrors})(err); }`);
+        updatedScript.append(`try { ${userCode}; } catch (err) { (${handleInputCodeErrors})(err); }`);
         document.head.append(updatedScript);
       }
     };
   }).toString();
-
 
   /* "HTML Skeleton" for 'iframe' context (i.e. bare-bones, before any "secondary" code is added/injected via auxiliary scripts or libraries such as 'React') */
   return `
