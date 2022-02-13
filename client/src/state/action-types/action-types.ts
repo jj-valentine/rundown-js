@@ -1,0 +1,6 @@
+  export enum ActionType {
+    INSERT_CELL_ABOVE = "INSERT_CELL_ABOVE",
+    UPDATE_CELL = "UPDATE_CELL",
+    SHIFT_CELL = "SHIFT_CELL",
+    DELETE_CELL = "DELETE_CELL"
+  }
