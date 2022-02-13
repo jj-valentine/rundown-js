@@ -1,16 +1,17 @@
 import React, { useState } from "react";
+// Utils + Plugins
+import { NewBundlerInstance as bundle } from "../../utils/bundler/bundle";
 // Component(s)
 import { CodeEditor } from "./CodeEditor/CodeEditor";
 import { Preview } from "./Preview/Preview";
-// Utils + Plugins
-import { bundler } from "../../utils/bundler";
+
 
 export const CodeSandbox: React.FC = () => {
   const [bundledCode, setBundledCode] = useState<string>("");
-
-  const updateBundledCode = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, code: string) => {
-    const updatedCode = await bundler.retrieveBundledCode(code);
-    setBundledCode(updatedCode);
+  
+  const updateBundledCode = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, rawCode: string) => {
+    const freshlyBundledCode = await bundle.retrieveBundledCode(rawCode);
+    setBundledCode(freshlyBundledCode);
   };
 
   return (

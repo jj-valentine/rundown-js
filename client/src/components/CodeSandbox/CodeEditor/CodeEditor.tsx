@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import MonacoEditor from "@monaco-editor/react";
 
 interface CodeEditorProps {
-  bundleInputCode: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, code: string) => void;
+  bundleInputCode: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, rawCode: string) => void;
 }
 
 export const CodeEditor: React.FC<CodeEditorProps> = ({ bundleInputCode }) => {
