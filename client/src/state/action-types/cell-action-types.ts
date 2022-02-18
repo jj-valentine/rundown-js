@@ -1,4 +1,4 @@
-  export enum ActionType {
+  export enum CellActionType {
     INSERT_CELL_ABOVE = "INSERT_CELL_ABOVE",
     UPDATE_CELL = "UPDATE_CELL",
     SHIFT_CELL = "SHIFT_CELL",

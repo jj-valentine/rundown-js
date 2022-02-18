@@ -1,11 +1,11 @@
 import * as esbuild from "esbuild-wasm";
-// Utils + Plugins
+// Utils (Plugins, Classes/Helpers, etc.)
 import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
 import { fetchPlugin } from "./plugins/fetch-plugin";
 
 export const NewBundlerInstance = (() => {
   /* initialize service instance */
-  const service = (async (): Promise<esbuild.Service> => {
+  const promisedService = (async (): Promise<esbuild.Service> => {
     return await esbuild.startService({
       worker: true,
       wasmURL: "https://unpkg.com/esbuild-wasm@0.8.27/esbuild.wasm"
@@ -14,11 +14,11 @@ export const NewBundlerInstance = (() => {
 
   const retrieveBundledCode = async (code: string): Promise<any> => {
     /* ensure service is initialized and running → attempt to user code input */
-    if (!service) return;
-    const run = await service;
+    if (!promisedService) return;
+    const service = await promisedService;
 
     try {
-      const fullBundle = await run.build({
+      const fullBundle = await service.build({
         entryPoints: ["index.tsx"],
         bundle: true,
         write: false,

@@ -1,4 +1,4 @@
-export type CellTypes = "code" | "markdown";
+export type CellTypes = "sandbox" | "markdown";
 
 export interface Cell {
   id: string;
