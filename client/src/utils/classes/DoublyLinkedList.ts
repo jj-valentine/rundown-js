@@ -1,8 +1,8 @@
 import { DLLNode } from "./DLLNode";
 
-class DoublyLinkedList<K, V> {
-  public head: DLLNode<K, V> | null;
-  public tail: DLLNode<K, V> | null;
+class DoublyLinkedList<V> {
+  public head: DLLNode<V> | null;
+  public tail: DLLNode<V> | null;
   private size: number;
 
   constructor() {
@@ -19,36 +19,37 @@ class DoublyLinkedList<K, V> {
     return this.size === 0;
   }
 
-  public insertBefore(key: K, value: V, nextNode?: DLLNode<K, V>): void {
-    if (key == null || value == null) return;
+  public insertBefore(value: V, nextNode?: DLLNode<V>): DLLNode<V> | undefined {
+    if (value === null || value === undefined) return;
     let node = undefined;
     if (!nextNode && this.size === 0) { // list is empty → new node is assigned to both 'head' and 'tail'
-      node = new DLLNode(key, value);
+      node = new DLLNode(value);
       this.head = node;
       this.tail = this.head;
     } else if (this.size) { // list contains at least one node
       if (!nextNode && this.tail) { // insert new node at end of non-empty list
         const prevNode = this.tail;
-        node = new DLLNode(key, value, prevNode, null);
+        node = new DLLNode(value, prevNode, null);
         prevNode.next = node;
         this.tail = node;
       } else if (nextNode && nextNode === this.head) { // insert new node at beginning of non-empty list
         const nextNode = this.head;
-        node = new DLLNode(key, value, null, nextNode);
+        node = new DLLNode(value, null, nextNode);
         nextNode.prev = node;
         this.head = node;
       } else if (nextNode) { // insert new node somewhere in the middle of list
         const prevNode = nextNode.prev;
-        node = new DLLNode(key, value, prevNode, nextNode);
+        node = new DLLNode(value, prevNode, nextNode);
         nextNode.prev = node;
         if (prevNode) prevNode.next = node;
       }
     }
 
     this.size++;
+    if (node) return node;
   }
   
-  public remove(node: DLLNode<K, V>): void {
+  public remove(node: DLLNode<V>): DLLNode<V> {
     if (!node.prev && !node.next && this.head === node && this.tail === node) { // remove only node contained in list
       this.head = null;
       this.tail = null;
@@ -71,6 +72,20 @@ class DoublyLinkedList<K, V> {
     } 
 
     this.size--;
+    return node;
+  }
+
+  public shift(node: DLLNode<V>, moveTowardHead: boolean): void {
+    if (this.size < 2) return;
+    const prevNode = node.prev, nextNode = node.next;
+    this.remove(node);
+
+    if (moveTowardHead && prevNode) {
+      this.insertBefore(node.value, prevNode);
+    } else if (!moveTowardHead && nextNode) {
+      if (nextNode.next) this.insertBefore(node.value, nextNode.next);
+      else this.insertBefore(node.value)
+    }
   }
 }
 

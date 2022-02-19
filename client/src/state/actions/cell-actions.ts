@@ -1,15 +1,20 @@
 import { CellActionType } from "../action-types/cell-action-types";
 import { CellTypes } from "../cell";
 
-interface InsertCellAction {
-  type: CellActionType.INSERT_CELL_ABOVE;
+export interface InsertCellBeforeAction {
+  type: CellActionType.INSERT_CELL_BEFORE;
   payload: {
     id: string; // 'id' of cell below insertion point/index
-    type: CellTypes;
+    cellType: CellTypes;
   };
 }
 
-interface UpdateCellAction {
+export interface DeleteCellAction {
+  type: CellActionType.DELETE_CELL;
+  payload: string; // 'id' of cell to delete
+}
+
+export interface UpdateCellAction {
   type: CellActionType.UPDATE_CELL;
   payload: {
     id: string;
@@ -17,17 +22,13 @@ interface UpdateCellAction {
   };
 }
 
-interface ShiftCellAction {
+export type Direction = "up" | "down";
+export interface ShiftCellAction {
   type: CellActionType.SHIFT_CELL;
   payload: {
     id: string;
-    direction: "up" | "down";
+    direction: Direction;
   };
 }
 
-interface DeleteCellAction {
-  type: CellActionType.DELETE_CELL;
-  payload: string; // 'id' of cell to delete
-}
-
-export type CellAction = InsertCellAction | UpdateCellAction | ShiftCellAction | DeleteCellAction;
+export type CellAction = InsertCellBeforeAction | DeleteCellAction | UpdateCellAction | ShiftCellAction;

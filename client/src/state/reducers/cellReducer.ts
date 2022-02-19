@@ -6,19 +6,35 @@ import { DLLNode, DoublyLinkedList } from "../../utils/classes/DoublyLinkedList"
 
 interface CellState {
   data: {
-    hash: {
-      [id: string]: DLLNode<string, Cell>
+    map: {
+      [id: string]: DLLNode<Cell>
     },
-    list: DoublyLinkedList<string, Cell>
+    list: DoublyLinkedList<Cell>
   };
   loading: boolean;
   error: string | null;
 }
 
-// const initialState: CellState = {
-  
-// };
+const initialState: CellState = {
+  data: {
+    map: {},
+    list: new DoublyLinkedList()
+  },
+  loading: false,
+  error: null
+};
 
-// const cellsReducer = (state: CellState = initialState, action: CellAction ) => {
-
-// };
+export const cellReducer = (state: CellState = initialState, action: CellAction): CellState => {
+  switch(action.type) {
+    case CellActionType.INSERT_CELL_BEFORE:
+      return state;
+    case CellActionType.DELETE_CELL:
+      return state;
+    case CellActionType.UPDATE_CELL:
+      return state;
+    case CellActionType.SHIFT_CELL:
+      return state; 
+    default:
+      return state;
+  }
+};
