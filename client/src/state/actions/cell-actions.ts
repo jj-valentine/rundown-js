@@ -4,7 +4,7 @@ import { CellTypes } from "../cell";
 export interface InsertCellBeforeAction {
   type: CellActionType.INSERT_CELL_BEFORE;
   payload: {
-    id: string; // 'id' of cell below insertion point/index
+    id: string | null; // 'id' of cell below insertion point/index
     cellType: CellTypes;
   };
 }

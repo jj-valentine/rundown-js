@@ -7,7 +7,7 @@ interface PreviewProps {
 }
 
 export const Preview: React.FC<PreviewProps> = ({ bundledCode }) => {
-  const iFrameRef = useRef<HTMLIFrameElement | null>(null);
+  const iFrameRef = useRef<HTMLIFrameElement | null>( null);
 
   useEffect(() => {
     if (!iFrameRef.current || !iFrameRef.current.contentWindow) return;

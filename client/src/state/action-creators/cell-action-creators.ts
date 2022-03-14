@@ -8,7 +8,7 @@ import {
   Direction
 } from "../actions/cell-actions";
 
-const insertCellBefore = (id: string, cellType: CellTypes): InsertCellBeforeAction => {
+const insertCellBefore = (id: string | null, cellType: CellTypes): InsertCellBeforeAction => {
   return {
     type: CellActionType.INSERT_CELL_BEFORE,
     payload: {
