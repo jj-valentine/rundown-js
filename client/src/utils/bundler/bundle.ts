@@ -28,7 +28,7 @@ export const NewBundlerInstance = (() => {
         ],
         define: {
           global: "window",
-          "process.env.NODE_ENV": "'production'"
+          "process.env.NODE_ENV": JSON.stringify('production')
         }
       });
       

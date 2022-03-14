@@ -1,7 +1,3 @@
-/* 
-NOTE: technically, we don't need to have a key (cellId) on each node 
-TODO: remove key from Node & DLL once it's all working! 
-*/ 
 export class DLLNode<V> {
   // private _key: K; 
   private _value: V;

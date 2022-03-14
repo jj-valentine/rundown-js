@@ -26,7 +26,7 @@ export const iFrameHTML = ((): string => {
       if (!document.getElementById("root")) {
         const root = document.createElement("div");
         root.setAttribute("id", "root");
-        document.body.append(root)
+        document.body.append(root);
       }
 
       const handleInputCodeErrors = ((error: any): void => {

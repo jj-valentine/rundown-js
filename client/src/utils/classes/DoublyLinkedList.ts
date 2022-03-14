@@ -19,20 +19,27 @@ class DoublyLinkedList<V> {
     return this.size === 0;
   }
 
-  public insertBefore(value: V, nextNode?: DLLNode<V>): DLLNode<V> | undefined {
+  // public update(id: string, updatedValue: V): DLLNode<V> | null {
+  //   let nextNode = null;
+  //   if (id && id.length) nextNode = node.next
+  //   const updatedNode = this.insertBefore(updatedValue, nextNode);    
+  //   return updatedNode ? updatedNode : null;
+  // }
+
+  public insertBefore(value: V, nextNode?: DLLNode<V> | null): DLLNode<V> | undefined {
     if (value === null || value === undefined) return;
     let node = undefined;
-    if (!nextNode && this.size === 0) { // list is empty → new node is assigned to both 'head' and 'tail'
+    if (!nextNode && this.isEmpty()) { // list is empty → new node is assigned to both 'head' and 'tail'
       node = new DLLNode(value);
       this.head = node;
       this.tail = this.head;
-    } else if (this.size) { // list contains at least one node
-      if (!nextNode && this.tail) { // insert new node at end of non-empty list
+    } else if (!this.isEmpty()) { // list contains at least one node
+      if (!nextNode && this.tail) { // insert new node at end of (non-empty) list
         const prevNode = this.tail;
         node = new DLLNode(value, prevNode, null);
         prevNode.next = node;
         this.tail = node;
-      } else if (nextNode && nextNode === this.head) { // insert new node at beginning of non-empty list
+      } else if (nextNode && nextNode === this.head) { // insert new node at beginning of (non-empty) list
         const nextNode = this.head;
         node = new DLLNode(value, null, nextNode);
         nextNode.prev = node;
@@ -46,7 +53,7 @@ class DoublyLinkedList<V> {
     }
 
     this.size++;
-    if (node) return node;
+    return node;
   }
   
   public remove(node: DLLNode<V>): DLLNode<V> {
